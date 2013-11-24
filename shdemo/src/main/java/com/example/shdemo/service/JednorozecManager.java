@@ -52,4 +52,18 @@ public class JednorozecManager implements JednorozecManagerIn{
 		return (Jednorozec) sessionFactory.getCurrentSession().getNamedQuery("jednorozec.byId").setLong("id", id).uniqueResult();
 	}
 
+	@Override
+	public void updateJednorozec(long id, String imie) {
+		Jednorozec j = new Jednorozec();
+		 j = (Jednorozec) sessionFactory.getCurrentSession().getNamedQuery("jednorozec.byId").setLong("id", id).uniqueResult();
+		 j.setImieJednorozca(imie);
+	}
+
+	@Override
+	public void deleteJednorozecById(long id) {
+		Jednorozec j = new Jednorozec();
+		j = (Jednorozec) sessionFactory.getCurrentSession().get(Jednorozec.class, id);
+		sessionFactory.getCurrentSession().delete(j);
+	}
+
 }
